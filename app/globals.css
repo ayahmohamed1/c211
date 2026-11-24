@@ -193,6 +193,9 @@ html, body {
   min-height: 100%; margin: auto; padding: 48px 20px; text-align: center;
 }
 .question-content .gift-title { max-width: 560px; }
+.question-content .question-title { font-size: clamp(1.6rem, 4vw, 1.9rem); line-height: 1.2; }
+.question-title span { display: block; }
+.question-message { color: #f472b6; font-size: 0.9rem; margin: -0.5rem 0 0.75rem; }
 .answer-image { position: relative; width: min(64vw, 280px); aspect-ratio: 1; margin: 0.5rem 0 1rem; }
 .countdown-heading { margin: 0 0 0.4rem; }
 .countdown { display: flex; justify-content: center; gap: clamp(8px, 3vw, 18px); margin-bottom: 0.5rem; }
@@ -208,6 +211,7 @@ html, body {
 @media (max-width: 480px) {
   .question-content { padding-top: 24px; padding-bottom: 32px; }
   .question-content .gift-title { font-size: clamp(2rem, 9vw, 2.8rem); }
+  .question-content .question-title { font-size: clamp(1.25rem, 5.5vw, 1.5rem); }
   .countdown-unit { min-width: 52px; padding: 8px 5px; }
   .countdown-value { font-size: 1.3rem; }
 }

@@ -23,7 +23,7 @@ function getNext25th() {
 }
 
 export default function GiftClient() {
-  const [answeredYes, setAnsweredYes] = useState(false)
+  const [screen, setScreen] = useState<'countdown' | 'question' | 'success'>('countdown')
   const [noCount, setNoCount] = useState(0)
   const [countdown, setCountdown] = useState<Countdown | null>(null)
 
@@ -71,7 +71,7 @@ export default function GiftClient() {
       </div>
 
       <section className="question-content">
-        {answeredYes ? (
+        {screen === 'success' ? (
           <>
             <p className="subtitle">✦ IT IS A YES! ✦</p>
             <div className="answer-image">
@@ -83,11 +83,11 @@ export default function GiftClient() {
                 style={{ objectFit: 'contain' }}
               />
             </div>
-            <p className="answer-message">Today at 8 on me</p>
+            <p className="answer-message">waiting for you</p>
           </>
-        ) : (
+        ) : screen === 'countdown' ? (
           <>
-            <p className="subtitle countdown-heading">few hours later</p>
+            <p className="subtitle countdown-heading">few hours left</p>
             <div className="countdown" aria-label="Countdown to the 25th">
               {countdownUnits.map(({ label, value }) => (
                 <div className="countdown-unit" key={label}>
@@ -105,7 +105,26 @@ export default function GiftClient() {
                 style={{ objectFit: 'contain' }}
               />
             </div>
-            <h1 className="gift-title">Would you have your birthday dinner with me?</h1>
+            <button className="btn-primary" onClick={() => setScreen('question')}>
+              Next
+            </button>
+          </>
+        ) : (
+          <>
+            <h1 className="gift-title question-title">
+              <span>Would you honor me with a</span>
+              <span>birthday dinner tonight at 8?</span>
+            </h1>
+            <p className="question-message">On me "just this once"</p>
+            <div className="answer-image">
+              <Image
+                src="/images/bear-ask.jpg"
+                alt="A bear asking a question"
+                fill
+                unoptimized
+                style={{ objectFit: 'cover', borderRadius: '50%' }}
+              />
+            </div>
             <div className="question-actions">
               <button
                 className="btn-primary"
@@ -113,7 +132,7 @@ export default function GiftClient() {
                   fontSize: `${1 + Math.min(noCount, 8) * 0.1}rem`,
                   padding: `${0.8 + Math.min(noCount, 8) * 0.05}rem ${2 + Math.min(noCount, 8) * 0.1}rem`,
                 }}
-                onClick={() => setAnsweredYes(true)}
+                onClick={() => setScreen('success')}
               >
                 Yes!
               </button>
